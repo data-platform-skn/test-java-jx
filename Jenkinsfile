@@ -31,7 +31,7 @@ pipeline {
     stage('ECR Login') {
       steps {
         script {
-          sh '\$(aws ecr get-login)'
+          sh 'aws ecr get-login'
         }
 
       }
