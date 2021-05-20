@@ -5,7 +5,6 @@ pipeline {
       steps {
         script {
           sh 'pack build demo-image --builder gcr.io/buildpacks/builder:v1'
-
         }
 
       }
@@ -23,7 +22,7 @@ pipeline {
     stage('Docker List Image') {
       steps {
         script {
-          sh 'docker images list'
+          sh 'docker images ls | grep demo-image'
         }
 
       }
