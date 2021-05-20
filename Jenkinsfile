@@ -22,7 +22,7 @@ pipeline {
     stage('Docker List Image') {
       steps {
         script {
-          sh 'docker images ls | grep demo-image'
+          sh 'docker images ls'
         }
 
       }
