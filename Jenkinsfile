@@ -34,23 +34,6 @@ pipeline {
       }
     }
 
-    stage('Building image') {
-      steps{
-        script {
-          
-        }
-      }
-    }
-
-
-    stage('ECR Login') {
-      steps {
-        script {
-          sh 'aws ecr get-login'
-        }
-
-      }
-    }
 
 
        stage('Deploy image') {
