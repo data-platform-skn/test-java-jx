@@ -1,4 +1,10 @@
 pipeline {
+  environment {
+    registry = '890324431850.dkr.ecr.ap-south-1.amazonaws.com/demo'
+    registryCredential = 'AWS-ECR'
+    dockerImage = ''
+    imageName = 'demo'
+  }
   agent any
   stages {
     stage('Build Pack Run') {
@@ -28,22 +34,18 @@ pipeline {
       }
     }
 
-    stage('Deploy image') {
-      steps {
-        script {
-          docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
-            docker.push("https://" + registry+"latest")
-          }
+
+
+       stage('Deploy image') {
+        steps{
+            script{
+                dockerImage = docker.build imageName
+                docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
+                   dockerImage.push('latest')
+                }
+            }
         }
 
-      }
-    }
-
   }
-  environment {
-    registry = '890324431850.dkr.ecr.ap-south-1.amazonaws.com/demo'
-    registryCredential = 'AWS-ECR'
-    dockerImage = ''
-    imageName = 'demo'
-  }
+}
 }
