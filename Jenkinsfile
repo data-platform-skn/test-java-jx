@@ -1,11 +1,29 @@
 pipeline {
   agent any
   stages {
-    stage('error') {
+    stage('Build Pack Run') {
       steps {
         script {
           sh 'pack build demo-image --builder gcr.io/buildpacks/builder:v1'
+
+        }
+
+      }
+    }
+
+    stage('Build pack complete') {
+      steps {
+        script {
           sh 'echo "Done"'
+        }
+
+      }
+    }
+
+    stage('Docker List Image') {
+      steps {
+        script {
+          sh 'docker images list'
         }
 
       }
